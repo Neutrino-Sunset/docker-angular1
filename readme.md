@@ -18,7 +18,7 @@ Most Docker container base images will not have Git installed. This means that w
 
 ## Steps to Create
 
-#### Creating the inital project
+### Creating the inital project
 
 Create a project directory on your WSL2 filesystem.
 
@@ -66,7 +66,7 @@ In `package.json` edit the `start` command to `ng serve --host 0.0.0.0`
 
 Run `npm start`, you should now be able to access the application in a browser on the host development machine at `localhost:4200`
 
-#### Debugging the project
+### Debugging the project
 
 In VsCode click the Debug button on the navigation sidebar.
 
@@ -84,7 +84,7 @@ Place a breakpoint on the `'console.log` line, press the button to start debuggi
 
 The browser should launch and the breakpoint will be hit.
 
-#### Enable starting the service using docker-compose.
+### Enable starting the service using docker-compose.
 
 Currently the application can be run because we manually ran `npm install` when setting up the dev constainer and then ran `npm start`. The following steps are necessary to enable the service to be rebuilt and run using docker-compose.
 
@@ -106,7 +106,7 @@ Note that since we manually installed `ng` globally now that we have rebuilt the
 
 With the container running it is possible to make changes to the project in VsCode opened on the WSL directory and on saving they will be recompiled and the browser reloaded. If your WSL user id is different to the root user in the dev container then VsCode will signal an error on attempting to save a modified file. This can be resolved by running `sudo chown <wsl_username> <filename>`. An better solution to the permission issue would be to run the dev container with a user having the same id as your WSL user, but there are currently issues with this approach when using bind mounted volumes. At any rate, modifying the code while the container is running via docker-compose isn't a particularly useful feature, but this demonstrates that it is nevertheless possible.
 
-#### Improve the experience connecting VsCode to an already running container
+### Improve the experience connecting VsCode to an already running container
 
 With the service run via `docker-compose up -d` opening the dev container in VsCode will cause VsCode to attach to the already running container. This is nice but the usefulness of this is limited since the terminal spawned by opening the VsCode dev container will not attach to the already running service process in the container. So if your container is already running `ng serve` when you attach to it you have no way to terminate this process and execute other commands instead like `npm install` or `npm test` or the restart the `ng serve`, and even if you could terminate the running `ng serve` that would not be useful since that would cause the container to exit anyway since that is the process that is keeping the container alive.
 
@@ -134,7 +134,7 @@ Then rebuild the dev container, exit from the dev container and launch the servi
 
 Open the project dev container in VsCode. You will find the `ng serve` process running in the integrated terminal in a `tmux` session. You can update the code and your changes will update in the running app, you can also exit the running `ng serve` process using `^C` and run other `npm` commands like `npm install` or `npm test` and restart the service again using `npm start`.
 
-#### Upload the project to Github
+### Upload the project to Github
 
 Since git was installed in the container to start with, the project will have been created with a Git repository already initialised. So all that is required to upload the project to Github is to commit the changes to any modified files, and then in the VsCode status bar click the `Publish to Github` button. Assuming you have a Github account, you will be prompted to select either a public or provide Github repository and the project will be uploaded.
 
