@@ -1,0 +1,11 @@
+version: "3.8"
+services:  
+  docker-angular1:
+    build: ./
+    tty: true
+    stdin_open: true
+    ports:
+      - 4200:4200
+    volumes:
+      - ./:/docker-angular1
+      - /node_modules
